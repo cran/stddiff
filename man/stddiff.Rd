@@ -23,7 +23,7 @@ stddiff.category() is used for categorical variables.
 stddiff should be less than 0.2.
 }
 \value{
-for stddiff.numeric function
+for stddiff.numeric function:
 \item{mean.c}{the mean of control group}
 \item{sd.c}{the standard deviation of control group}
 \item{mean.t}{the mean of treatment group}
@@ -58,20 +58,22 @@ Yang DS, Dalton JE. A Unified Approach to Measuring the Effect Size Between Two 
 Zhicheng Du<dgdzc@hotmail.com>, Yuantao Hao<haoyt@mail.sysu.edu.cn>
 }
 \note{
-nothing
+Update:
+
+version 2.0: Avoiding the negative number for the 'stddiff' of stddiff.numeric() and stddiff.binary()
 }
 \seealso{
 nothing
 }
 \examples{
 #set.seed(2016)
-#treat=round(abs(rnorm(100)+1)*10,0) %% 2
-#numeric=round(abs(rnorm(100)+1)*10,0)
-#binary=round(abs(rnorm(100)+1)*10,0) %% 2
-#category=round(abs(rnorm(100)+1)*10,0) %% 3
-#data=data.frame(treat,numeric,binary,category)
+#treat<-round(abs(rnorm(100)+1)*10,0) %% 2
+#numeric<-round(abs(rnorm(100)+1)*10,0)
+#binary<-round(abs(rnorm(100)+1)*10,0) %% 2
+#category<-round(abs(rnorm(100)+1)*10,0) %% 3
+#data<-data.frame(treat,numeric,binary,category)
 #stddiff.numeric(data=data,gcol=1,vcol=c(2,2))
 #stddiff.binary(data=data,gcol=1,vcol=c(3,3))
 #stddiff.category(data=data,gcol=1,vcol=c(4,4))
 }
-\keyword{standardized difference,propensity score matching}
+\keyword{standardized difference, propensity score matching}
