@@ -47,13 +47,9 @@ stddiff.binary<-function(data,gcol,vcol){
 }
 
 stddiff.category<-function(data,gcol,vcol){
-  for(i in 1:length(c(gcol,vcol))){
-    data[,c(gcol,vcol)[i]]<-as.factor(data[,c(gcol,vcol)[i]])
-  }
+  for(i in 1:length(c(gcol,vcol))){data[,c(gcol,vcol)[i]]<-as.factor(data[,c(gcol,vcol)[i]])}
   nr<-NA
-  for(i in 1:length(vcol)){
-    nr[i]<-length(levels(data[,vcol[i]]))
-  }
+  for(i in 1:length(vcol)){nr[i]<-length(levels(data[,vcol[i]]))}
   rst<-matrix(rep(0,7*sum(nr)),ncol=7)
   rname<-NA
   for(i in 1:length(nr)){
@@ -92,7 +88,7 @@ stddiff.category<-function(data,gcol,vcol){
       rst[1:nr[i],]<-cbind(prop,c(na.c,rep(NA,k)),c(na.t,rep(NA,k)),c(stddiff,rep(NA,k)),c(stddiff.l,rep(NA,k)),c(stddiff.u,rep(NA,k)))
     }
     if(i>1){
-      rst[(nr[i-1]+1):(nr[i-1]+nr[i]),]<-cbind(prop,c(na.c,rep(NA,k)),c(na.t,rep(NA,k)),c(stddiff,rep(NA,k)),c(stddiff.l,rep(NA,k)),c(stddiff.u,rep(NA,k)))
+      rst[(sum(nr[1:(i-1)])+1):(sum(nr[1:(i-1)])+nr[i]),]<-cbind(prop,c(na.c,rep(NA,k)),c(na.t,rep(NA,k)),c(stddiff,rep(NA,k)),c(stddiff.l,rep(NA,k)),c(stddiff.u,rep(NA,k)))
     }
   }
   rst<-round(rst,3)

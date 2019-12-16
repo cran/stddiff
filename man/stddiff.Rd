@@ -20,7 +20,7 @@ stddiff.category(data,gcol,vcol)
 stddiff.numeric() is used for numeric variables.
 stddiff.binary() is used for binomial variables.
 stddiff.category() is used for categorical variables.
-stddiff should be less than 0.2.
+stddiff should be less than 0.2 or 0.1.
 }
 \value{
 for stddiff.numeric function:
@@ -61,6 +61,8 @@ Zhicheng Du<dgdzc@hotmail.com>, Yuantao Hao<haoyt@mail.sysu.edu.cn>
 Update:
 
 version 2.0: Avoiding the negative number for the 'stddiff' of stddiff.numeric() and stddiff.binary()
+
+version 3.0: Fixing the incorrect format in the results of stddiff.category()
 }
 \seealso{
 nothing
@@ -76,4 +78,5 @@ nothing
 #stddiff.binary(data=data,gcol=1,vcol=c(3,3))
 #stddiff.category(data=data,gcol=1,vcol=c(4,4))
 }
-\keyword{standardized difference, propensity score matching}
+\concept{standardized difference}
+\concept{propensity score matching}
