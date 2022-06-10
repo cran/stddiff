@@ -5,8 +5,8 @@ stddiff.numeric<-function(data,gcol,vcol){
     c("mean.c","sd.c","mean.t","sd.t","missing.c","missing.t","stddiff","stddiff.l","stddiff.u"))
   for(i in 1:length(vcol)){
     data[,vcol[i]]<-as.numeric(data[,vcol[i]])
-    na.c<-nrow(data[is.na(data[,vcol[i]][which(data[,gcol]==levels(data[,gcol])[1])]),])
-    na.t<-nrow(data[is.na(data[,vcol[i]][which(data[,gcol]==levels(data[,gcol])[2])]),])
+    na.c<-length(which(is.na(data[,vcol[i]][which(data[,gcol]==levels(data[,gcol])[1])])))
+    na.t<-length(which(is.na(data[,vcol[i]][which(data[,gcol]==levels(data[,gcol])[2])])))
     temp<-na.omit(data[,c(gcol,vcol[i])])
     m<-aggregate(temp[,2],by=list(temp[,1]),FUN=mean)
     s<-aggregate(temp[,2],by=list(temp[,1]),FUN=sd)
@@ -29,8 +29,8 @@ stddiff.binary<-function(data,gcol,vcol){
   dimnames(rst)<-list(names(data)[vcol],
     c("p.c","p.t","missing.c","missing.t","stddiff","stddiff.l","stddiff.u"))
   for(i in 1:length(vcol)){
-    na.c<-nrow(data[is.na(data[,vcol[i]][which(data[,gcol]==levels(data[,gcol])[1])]),])
-    na.t<-nrow(data[is.na(data[,vcol[i]][which(data[,gcol]==levels(data[,gcol])[2])]),])
+    na.c<-length(which(is.na(data[,vcol[i]][which(data[,gcol]==levels(data[,gcol])[1])])))
+    na.t<-length(which(is.na(data[,vcol[i]][which(data[,gcol]==levels(data[,gcol])[2])])))
     temp<-na.omit(data[,c(gcol,vcol[i])])
     temp[,2]<-as.numeric(temp[,2])
     p1<-mean(temp[,2][which(temp[,1]==levels(temp[,1])[2])])-1
@@ -58,16 +58,16 @@ stddiff.category<-function(data,gcol,vcol){
   dimnames(rst)<-list(rname[-1],
     c("p.c","p.t","missing.c","missing.t","stddiff","stddiff.l","stddiff.u"))
   for(i in 1:length(vcol)){
-    na.c<-nrow(data[is.na(data[,vcol[i]][which(data[,gcol]==levels(data[,gcol])[1])]),])
-    na.t<-nrow(data[is.na(data[,vcol[i]][which(data[,gcol]==levels(data[,gcol])[2])]),])
+    na.c<-length(which(is.na(data[,vcol[i]][which(data[,gcol]==levels(data[,gcol])[1])])))
+    na.t<-length(which(is.na(data[,vcol[i]][which(data[,gcol]==levels(data[,gcol])[2])])))
     temp<-na.omit(data[,c(gcol,vcol[i])])
     tbl<-table(temp[,2],temp[,1])
     prop<-prop.table(tbl,2)
-    t<-prop[-1,2]
-    c<-prop[-1,1]
+    t<-prop[-1,2]#k=2,3,...,K
+    c<-prop[-1,1]#k=2,3,...,K
     k<-nr[i]-1
     l<-k
-    s<-matrix(rep(0,k*l),ncol=k)
+    s<-matrix(rep(0,k*l),ncol=l)
     for(ii in 1:k){
       for(j in 1:l){
         if(ii==j){s[ii,j]<-0.5*(t[ii]*(1-t[ii])+c[ii]*(1-c[ii]))}
